@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');
+
+// Tailwind library.
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
+
+// Add this attribute to elements that should be hidden until Alpine.js
+// initializes. See project page for more info.
+[x-cloak] { display: none; }

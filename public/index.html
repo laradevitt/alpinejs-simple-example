@@ -1,0 +1,255 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>Order a gift card</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/main.css">
+
+  <script>
+    function page() {
+      return {
+        // Gift card amount selector.
+        selected: '50',
+        select(id) {
+          this.selected = id;
+        },
+
+        // Mobile menu.
+        openMenu: true,
+        toggleMenu() {
+          this.openMenu = this.openMenu ? false : true;
+        },
+
+        // Update cart.
+        cartMessage: 'Your cart is empty!',
+        totalCount: 0,
+        products: ['25', '50', '75', '100'],
+        addItem() {
+          this.totalCount = this.totalCount + 1;
+          this.cartMessage = 'Your cart contains ' + this.totalCount;
+          this.cartMessage += this.totalCount > 1 ? ' items.' : ' item.';
+          this.openCart();
+        },
+
+        // Show/hide cart.
+        showCart: false,
+        openCart() {
+          this.showCart = true;
+          var self = this;
+          setTimeout((function() { self.closeCart(); }), 3000);
+        },
+        closeCart() { this.showCart = false },
+      }
+    }
+  </script>
+
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <div x-data="page()">
+
+    <nav class="bg-white shadow">
+      <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <div class="hidden sm:flex flex-shrink-0 items-center pr-4">
+              Company Name
+            </div>
+            <div class="hidden sm:ml-6 sm:flex">
+              <a href="#" class="inline-flex items-center px-1 pt-1 border-b-2 border-secondary-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-secondary-700 transition duration-150 ease-in-out">
+                Home
+              </a>
+            </div>
+          </div>
+          <div class="hidden sm:ml-6 sm:flex sm:items-center">
+            <button @click="openCart()" class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
+              <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+            </button>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-gray-100 text-gray-800">
+              <span x-text="totalCount"></span>
+            </span>
+          </div>
+          <div class="w-full flex items-center sm:hidden">
+            <div class="flex-grow">
+              Company Name
+            </div>
+            <div class="w-16 flex items-center">
+              <button @click="openCart()" class="p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                  <circle cx="9" cy="21" r="1"></circle>
+                  <circle cx="20" cy="21" r="1"></circle>
+                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+              </button>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-gray-100 text-gray-800">
+                <span x-text="totalCount"></span>
+              </span>
+            </div>
+            <div class="flex-shrink-0">
+              <button @click="toggleMenu()" class="inline-flex items-center justify-center p-2 text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                  <path :class="{'hidden': openMenu, 'inline-flex': !openMenu }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                  <path :class="{'hidden': !openMenu, 'inline-flex': openMenu }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div :class="{'block': openMenu, 'hidden': !openMenu}" class="hidden sm:hidden">
+        <div class="pt-2 pb-3">
+          <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-secondary-500 text-base font-medium text-secondary-700 bg-secondary-50 focus:outline-none focus:text-secondary-800 focus:bg-secondary-100 focus:border-secondary-700 transition duration-150 ease-in-out">Dashboard</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-40">
+
+        <div class="bg-white flex flex-col md:flex-row w-full">
+          <div class="w-full md:w-1/2 pb-12 sm:px-6 lg:px-20">
+            <div class="mx-auto max-w-xs sm:max-w-sm">
+              <img class="w-full" src="images/undraw_gift_card_6ekc.svg" alt="" />
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 justify-center sm:px-6 lg:px-20">
+            <div class="mx-auto max-w-sm">
+              <div>
+                <h2 class="text-3xl leading-9 font-extrabold text-gray-900">
+                  Buy a Gift Card
+                </h2>
+              </div>
+
+              <div class="mt-8">
+                <div>
+                  <div>
+
+                    <div class="relative">
+                      <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                      </div>
+                      <div class="relative flex justify-center text-sm leading-5">
+                        <span class="px-2 bg-white text-gray-500">
+                          Select an amount
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="mt-4 grid grid-cols-4 gap-3">
+
+                      <template x-for="product in products" :key="product">
+                        <div>
+                          <span class="w-full inline-flex rounded-md shadow-sm">
+                            <button type="button" @click="select(product)" :class="{ 'bg-gray-200 text-gray-500': selected === product }" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-400 hover:text-gray-500 focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                              $<span x-text="product"></span>
+                            </button>
+                          </span>
+                        </div>
+                    	</template>
+
+                    </div>
+                  </div>
+
+                  <div class="mt-6 relative">
+                    <div class="absolute inset-0 flex items-center">
+                      <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm leading-5">
+                      <span class="px-2 bg-white text-gray-500">
+                        Recipient information
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <!--<form action="#" method="POST">-->
+
+                    <div>
+                      <label for="email" class="block text-sm font-medium leading-5 text-gray-700">
+                        Recipient name
+                      </label>
+                      <div class="mt-1 relative rounded-md shadow-sm">
+                        <input id="name" class="form-input block w-full sm:text-sm sm:leading-5" placeholder="Jane Doe" />
+                      </div>
+                    </div>
+
+                    <div class="mt-6">
+                      <label for="email" class="block text-sm font-medium leading-5 text-gray-700">
+                        Recipient email
+                      </label>
+                      <div class="mt-1 rounded-md shadow-sm">
+                        <input id="email" type="email" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="jane@example.com" />
+                      </div>
+                    </div>
+
+                    <div class="mt-6">
+                      <div class="flex">
+                        <div class="flex-1 pr-1">
+                          <button @click="addItem()" type="submit" class="w-full flex justify-center py-2 px-4 text-sm font-medium text-white bg-secondary-600 hover:bg-secondary-500 focus:outline-none focus:border-secondary-700 active:bg-secondary-700 transition duration-150 ease-in-out">
+                            Add to cart
+                          </button>
+                        </div>
+                        <div class="flex-1 pl-1">
+                          <button type="submit" class="w-full flex justify-center py-2 px-4 text-sm font-medium text-white bg-green-600 hover:bg-green-500 focus:outline-none focus:border-green-700 active:bg-green-700 transition duration-150 ease-in-out">
+                            Checkout
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  <!--</form>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="fixed inset-0 flex items-end justify-center px-4 py-6 pointer-events-none sm:p-6 sm:items-start sm:justify-end">
+        <div x-show="showCart" x-cloak x-transition:enter="transform ease-out duration-300 transition" x-transition:enter-start="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2" x-transition:enter-end="translate-y-0 opacity-100 sm:translate-x-0" x-transition:leave="transition ease-in duration-500" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto">
+          <div class="rounded-lg shadow-xs overflow-hidden">
+            <div class="p-4">
+              <div class="flex items-start">
+                <div :class="{ 'hidden': totalCount < 1 }" class="flex-shrink-0">
+                  <svg class="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <div class="ml-3 w-0 flex-1 pt-0.5">
+                  <p class="text-sm leading-5 font-medium text-gray-900">
+                    <span x-text="cartMessage"></span>
+                  </p>
+                </div>
+                <div class="ml-4 flex-shrink-0 flex">
+                  <button @click="closeCart()" class="inline-flex text-gray-400 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150">
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  <div>
+
+  <script src="js/alpine.js"></script>
+
+</body>
+
+</html>

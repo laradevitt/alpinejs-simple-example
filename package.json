@@ -1,0 +1,20 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "node node_modules/grunt-cli/bin/grunt build",
+    "watch": "node node_modules/grunt-cli/bin/grunt watch"
+  },
+  "devDependencies": {
+    "alpinejs": "^2.2.5",
+    "autoprefixer": "^9.7.4",
+    "gulp": "^4.0.2",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.13.1",
+    "node-sass-tilde-importer": "^1.0.2",
+    "tailwindcss": "^1.2.0"
+  },
+  "dependencies": {}
+}
