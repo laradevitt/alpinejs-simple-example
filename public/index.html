@@ -8,50 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/main.css">
 
-  <script>
-    function page() {
-      return {
-        // Gift card amount selector.
-        selectedAmount: '50',
-        select(id) {
-          this.selectedAmount = id;
-        },
-
-        // Mobile menu.
-        openMenu: true,
-        toggleMenu() {
-          this.openMenu = this.openMenu ? false : true;
-        },
-
-        // Update cart.
-        cartMessage: 'Your cart is empty!',
-        totalCount: 0,
-        products: ['25', '50', '75', '100'],
-        addItem() {
-          this.totalCount = this.totalCount + 1;
-          this.cartMessage = 'Your cart contains ' + this.totalCount;
-          this.cartMessage += this.totalCount > 1 ? ' items.' : ' item.';
-          this.openCart();
-        },
-
-        // Show/hide cart.
-        showCart: false,
-        openCart() {
-          this.showCart = true;
-          var self = this;
-          setTimeout((function() { self.closeCart(); }), 3000);
-        },
-        closeCart() { this.showCart = false },
-      }
-    }
-  </script>
-
 </head>
 
 <body>
-  <!--[if IE]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-  <![endif]-->
 
   <div x-data="page()">
 
@@ -151,7 +110,7 @@
                       <template x-for="product in products" :key="product">
                         <div>
                           <span class="w-full inline-flex rounded-md shadow-sm">
-                            <button type="button" @click="select(product)" :class="{ 'bg-gray-200 text-gray-500': selectedAmount === product }" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-400 hover:text-gray-500 focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
+                            <button type="button" @click="select(product)" :class="{ 'bg-gray-200 text-gray-500': selected === product }" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md bg-white text-sm leading-5 font-medium text-gray-400 hover:text-gray-500 focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
                               $<span x-text="product"></span>
                             </button>
                           </span>
@@ -248,8 +207,46 @@
 
   <div>
 
-  <script src="js/alpine.js"></script>
+  <script src="js/alpine.js" defer></script>
+
+  <script>
+    function page() {
+      return {
+        selected: '',
+        select(id) {
+          this.selected = id;
+        },
+
+        // Mobile menu.
+        openMenu: true,
+        toggleMenu() {
+          this.openMenu = this.openMenu ? false : true;
+        },
+
+        // Update cart.
+        cartMessage: 'Your cart is empty!',
+        totalCount: 0,
+        products: ['25', '50', '75', '100'],
+        addItem() {
+          if (this.selected) {
+            this.totalCount = this.totalCount + 1;
+            this.cartMessage = 'Your cart contains ' + this.totalCount;
+            this.cartMessage += this.totalCount > 1 ? ' items.' : ' item.';
+          }
+          this.openCart();
+        },
+
+        // Show/hide cart.
+        showCart: false,
+        openCart() {
+          this.showCart = true;
+          var self = this;
+          setTimeout((function() { self.closeCart(); }), 3000);
+        },
+        closeCart() { this.showCart = false },
+      }
+    }
+  </script>
 
 </body>
-
 </html>
