@@ -2,10 +2,6 @@
   "name": "template",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "build": "node node_modules/grunt-cli/bin/grunt build",
-    "watch": "node node_modules/grunt-cli/bin/grunt watch"
-  },
   "devDependencies": {
     "alpinejs": "^2.7.0",
     "autoprefixer": "^9.8.6",
